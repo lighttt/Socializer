@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/author_iv"
+        android:src="@drawable/profile"
+        android:contentDescription="@string/profile_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/author_tv"
+        android:fontFamily="sans-serif-medium"
+        android:layout_toEndOf="@+id/author_iv"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_tv"
+        android:layout_toEndOf="@+id/author_tv"
+        android:textColor="@color/colorSecondaryText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/message_tv"
+        android:layout_below="@+id/author_tv"
+        android:layout_alignStart="@id/author_tv"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorText"/>
+</RelativeLayout>

@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:defaultValue="@bool/follow_default_value"
+        app:key="@string/follow_key_switch_manish"
+        app:summaryOn="@string/follow_summary_following"
+        app:summaryOff="@string/follow_summary_not_following"
+        app:title="@string/follow_title_manish"/>
+
+    <SwitchPreferenceCompat
+        app:defaultValue="@bool/follow_default_value"
+        app:key="@string/follow_key_switch_samip"
+        app:summaryOn="@string/follow_summary_following"
+        app:summaryOff="@string/follow_summary_not_following"
+        app:title="@string/follow_title_samip"/>
+
+
+    <SwitchPreferenceCompat
+        app:defaultValue="@bool/follow_default_value"
+        app:key="@string/follow_key_switch_ram"
+        app:summaryOn="@string/follow_summary_following"
+        app:summaryOff="@string/follow_summary_not_following"
+        app:title="@string/follow_title_ram"/>
+
+    <SwitchPreferenceCompat
+        app:defaultValue="@bool/follow_default_value"
+        app:key="@string/follow_key_switch_shyam"
+        app:summaryOn="@string/follow_summary_following"
+        app:summaryOff="@string/follow_summary_not_following"
+        app:title="@string/follow_title_shyam"/>
+
+    <SwitchPreferenceCompat
+        app:defaultValue="@bool/follow_default_value"
+        app:key="@string/follow_key_switch_hari"
+        app:summaryOn="@string/follow_summary_following"
+        app:summaryOff="@string/follow_summary_not_following"
+        app:title="@string/follow_title_hari"/>
+
+
+</PreferenceScreen>

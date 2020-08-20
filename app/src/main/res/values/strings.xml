@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Socializer</string>
+    <string name="profile_image">Profile Image</string>
+
+<!--    Preferences-->
+
+    <string name="follow_key_switch_manish">key_manish</string>
+    <string name="follow_key_switch_samip">key_samip</string>
+    <string name="follow_key_switch_ram">key_ram</string>
+    <string name="follow_key_switch_shyam">key_shyam</string>
+    <string name="follow_key_switch_hari">key_hari</string>
+
+    <string name="follow_title_manish">Manish</string>
+    <string name="follow_title_samip">Samip</string>
+    <string name="follow_title_ram">Ram</string>
+    <string name="follow_title_shyam">Shyam</string>
+    <string name="follow_title_hari">Hari</string>
+
+
+    <string name="follow_summary_following">Following</string>
+    <string name="follow_summary_not_following">Not Following</string>
+
+
+
+</resources>
