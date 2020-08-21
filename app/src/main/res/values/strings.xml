@@ -19,7 +19,7 @@
 
     <string name="follow_summary_following">Following</string>
     <string name="follow_summary_not_following">Not Following</string>
-
+    <string name="follow_settings">Follow Settings</string>
 
 
 </resources>
