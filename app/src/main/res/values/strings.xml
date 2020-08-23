@@ -2,6 +2,11 @@
     <string name="app_name">Socializer</string>
     <string name="profile_image">Profile Image</string>
 
+<!--    Notifications-->
+    <string name="notification_message">"New Message from Socializer %s"</string>
+    <string name="message_token_format">"InstanceID token: %s"</string>
+
+
 <!--    Preferences-->
 
     <string name="follow_key_switch_manish">key_manish</string>

@@ -11,13 +11,21 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import np.com.manishtuladhar.socializer.following.FollowingPreferenceActivity;
 import np.com.manishtuladhar.socializer.provider.SocializerContract;
@@ -72,6 +80,41 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         //init loader
         getSupportLoaderManager().initLoader(LOADER_ID_POSTS,null,this);
+
+        //create notification channel
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel = new NotificationChannel(
+                   "socializer_channel",
+                    "socializer_channel",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        //get the notification data
+        Bundle extras = getIntent().getExtras();
+
+        if(extras!=null && extras.containsKey("test"))
+        {
+            Log.e(TAG, "onCreate: "+extras.getString("test") );
+        }
+
+        //firebase token
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String token = instanceIdResult.getToken();
+                String msg = getString(R.string.message_token_format,token);
+                Log.e(TAG, "onSuccess: "+msg );
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: Sorry failed to get id");
+            }
+        });
 
     }
 
