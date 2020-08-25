@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     //DATABASE vars
     static final String[] POSTS_PROJECTION = {
-            SocializerContract.COLUMN_AUTHOR,
-            SocializerContract.COLUMN_MESSAGE,
-            SocializerContract.COLUMN_DATE,
-            SocializerContract.COLUMN_AUTHOR_KEY,
+            SocializerContract.PostEntry.COLUMN_AUTHOR,
+            SocializerContract.PostEntry.COLUMN_MESSAGE,
+            SocializerContract.PostEntry.COLUMN_DATE,
+            SocializerContract.PostEntry.COLUMN_AUTHOR_KEY,
     };
     static final int COL_NUM_AUTHOR = 0;
     static final int COL_NUM_MESSAGE = 1;
@@ -144,15 +146,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-       String selection = SocializerContract.createdSelectionForCurrentFollowers(
+       String selection = SocializerContract.PostEntry.createdSelectionForCurrentFollowers(
                PreferenceManager.getDefaultSharedPreferences(this));
        Log.e(TAG, "onCreateLoader: Selection is"+selection );
        return new CursorLoader(
                 this,
-                SocializerProvider.SocializerPosts.CONTENT_URI,
+                SocializerContract.PostEntry.CONTENT_URI,
                 POSTS_PROJECTION,selection,
                 null,
-                SocializerContract.COLUMN_DATE + " DESC");
+               SocializerContract.PostEntry.COLUMN_DATE + " DESC");
     }
 
     @Override

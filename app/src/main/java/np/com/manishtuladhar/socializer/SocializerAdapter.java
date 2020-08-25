@@ -71,27 +71,27 @@ public class SocializerAdapter extends RecyclerView.Adapter<SocializerAdapter.So
 
         switch (authorKey)
         {
-            case SocializerContract
+            case SocializerContract.PostEntry
                     .MANISH_KEY:
                 holder.authorIV.setImageResource(R.drawable.profile);
             break;
 
-            case SocializerContract
+            case SocializerContract.PostEntry
                     .SAMIP_KEY:
                 holder.authorIV.setImageResource(R.drawable.profile);
                 break;
 
-            case SocializerContract
+            case SocializerContract.PostEntry
                     .RAM_KEY:
                 holder.authorIV.setImageResource(R.drawable.profile);
                 break;
 
-            case SocializerContract
+            case SocializerContract.PostEntry
                     .HARI_KEY:
                 holder.authorIV.setImageResource(R.drawable.profile);
                 break;
 
-            case SocializerContract
+            case SocializerContract.PostEntry
                     .SHYAM_KEY:
                 holder.authorIV.setImageResource(R.drawable.profile);
                 break;

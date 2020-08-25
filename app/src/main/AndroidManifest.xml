@@ -30,6 +30,10 @@
             </intent-filter>
         </service>
 
+        <provider
+            android:authorities="np.com.manishtuladhar.socializer"
+            android:name=".provider.SocializerProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>

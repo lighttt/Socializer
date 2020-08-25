@@ -29,10 +29,10 @@ public class SocializerFirebaseMessagingService extends FirebaseMessagingService
     private static final String TAG = "SocializerFCM";
 
     //json keys
-    private static final String JSON_KEY_AUTHOR = SocializerContract.COLUMN_AUTHOR;
-    private static final String JSON_KEY_AUTHOR_KEY = SocializerContract.COLUMN_AUTHOR_KEY;
-    private static final String JSON_KEY_MESSAGE = SocializerContract.COLUMN_MESSAGE;
-    private static final String JSON_KEY_DATE = SocializerContract.COLUMN_DATE;
+    private static final String JSON_KEY_AUTHOR = SocializerContract.PostEntry.COLUMN_AUTHOR;
+    private static final String JSON_KEY_AUTHOR_KEY = SocializerContract.PostEntry.COLUMN_AUTHOR_KEY;
+    private static final String JSON_KEY_MESSAGE = SocializerContract.PostEntry.COLUMN_MESSAGE;
+    private static final String JSON_KEY_DATE = SocializerContract.PostEntry.COLUMN_DATE;
 
     @Override
     public void onNewToken(@NonNull String s) {
@@ -51,7 +51,7 @@ public class SocializerFirebaseMessagingService extends FirebaseMessagingService
         if (data.size() > 0) {
             Log.e(TAG, "onMessageReceived: " + data);
             sendNotification(data);
-            //insertToSocializer(data);
+            insertToSocializer(data);
         }
     }
 
@@ -60,19 +60,14 @@ public class SocializerFirebaseMessagingService extends FirebaseMessagingService
      */
     private void insertToSocializer(final Map<String, String> data) {
         //database operation doing on new thread
-        AsyncTask<Void, Void, Void> insertToSocializerTask = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                ContentValues newMessage = new ContentValues();
-                newMessage.put(SocializerContract.COLUMN_AUTHOR, data.get(JSON_KEY_AUTHOR));
-                newMessage.put(SocializerContract.COLUMN_MESSAGE, data.get(JSON_KEY_MESSAGE).trim());
-                newMessage.put(SocializerContract.COLUMN_DATE, data.get(JSON_KEY_DATE));
-                newMessage.put(SocializerContract.COLUMN_AUTHOR_KEY, data.get(JSON_KEY_AUTHOR_KEY));
-                getContentResolver().insert(SocializerProvider.SocializerPosts.CONTENT_URI, newMessage);
-                return null;
-            }
-        };
-        insertToSocializerTask.execute();
+
+        ContentValues newMessage = new ContentValues();
+        newMessage.put(SocializerContract.PostEntry.COLUMN_AUTHOR, data.get(JSON_KEY_AUTHOR));
+        newMessage.put(SocializerContract.PostEntry.COLUMN_MESSAGE, data.get(JSON_KEY_MESSAGE).trim());
+        newMessage.put(SocializerContract.PostEntry.COLUMN_DATE, data.get(JSON_KEY_DATE));
+        newMessage.put(SocializerContract.PostEntry.COLUMN_AUTHOR_KEY, data.get(JSON_KEY_AUTHOR_KEY));
+        getContentResolver().insert(SocializerContract.PostEntry.CONTENT_URI, newMessage);
+
     }
 
     private void sendNotification(Map<String, String> data) {
@@ -87,23 +82,22 @@ public class SocializerFirebaseMessagingService extends FirebaseMessagingService
         String author = data.get(JSON_KEY_AUTHOR);
         String message = data.get(JSON_KEY_MESSAGE);
 
-        if (message.length() > 30)
-        {
-            message=message.substring(0,30) + "\u2026";
+        if (message.length() > 30) {
+            message = message.substring(0, 30) + "\u2026";
         }
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,"socializer_channel")
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "socializer_channel")
                 .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(String.format(getString(R.string.notification_message),author))
+                .setContentTitle(String.format(getString(R.string.notification_message), author))
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,notificationBuilder.build());
+        notificationManager.notify(0, notificationBuilder.build());
 
     }
 }
